@@ -305,8 +305,16 @@ export function KujiManager({ onClose }: KujiManagerProps) {
               <div className="space-y-2">
                 <Label className="text-sm">Color</Label>
                 <div className="flex items-center gap-3">
+                  <input
+                    type="color"
+                    id="color-picker-hidden"
+                    value={normalizeHexForPicker(newItem.color)}
+                    onChange={(e) => setNewItem({ ...newItem, color: e.target.value })}
+                    className="hidden"
+                  />
                   <div
-                    className="h-16 w-16 flex-shrink-0 rounded-xl border-2 border-white transition-all"
+                    onClick={() => document.getElementById('color-picker-hidden')?.click()}
+                    className="h-16 w-16 flex-shrink-0 cursor-pointer rounded-xl border-2 border-white transition-all hover:scale-105"
                     style={{
                       backgroundColor: newItem.color,
                       boxShadow: `0 0 20px ${newItem.color}60`,
