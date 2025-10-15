@@ -1,0 +1,78 @@
+/* WebView Compatibility Fallbacks */
+
+/* Fallback for backdrop-filter on older WebView */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass {
+    background: rgba(19, 19, 26, 0.9) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Fallback for modern color functions */
+@supports not (color: oklch(70% 0.2 210)) {
+  :root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --accent: #ec4899;
+    --background: #0f0f23;
+    --foreground: #f8fafc;
+    --muted: #1e293b;
+    --border: #334155;
+    --ring: #6366f1;
+  }
+
+  .dark {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --accent: #ec4899;
+    --background: #0f0f23;
+    --foreground: #f8fafc;
+    --muted: #1e293b;
+    --border: #334155;
+    --ring: #6366f1;
+  }
+}
+
+/* Enhanced neon glow for older WebView */
+@supports not (color: color-mix(in oklch, var(--primary) 50%, transparent)) {
+  .neon-glow {
+    box-shadow:
+      0 0 20px rgba(99, 102, 241, 0.5),
+      0 0 40px rgba(99, 102, 241, 0.3),
+      inset 0 0 20px rgba(99, 102, 241, 0.1);
+  }
+
+  .neon-glow-purple {
+    box-shadow:
+      0 0 20px rgba(168, 85, 247, 0.5),
+      0 0 40px rgba(168, 85, 247, 0.3),
+      inset 0 0 20px rgba(168, 85, 247, 0.1);
+  }
+}
+
+/* Ensure gradients work on older WebView */
+@supports not (background: linear-gradient(in oklch, red, blue)) {
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  }
+
+  .bg-gradient-to-r {
+    background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+  }
+}
+
+/* Fix for WebView < 120 */
+@media (max-device-width: 768px) {
+  .glass {
+    background: rgba(19, 19, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Ensure touch targets are properly sized */
+  button,
+  [role='button'] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

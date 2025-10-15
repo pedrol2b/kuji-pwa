@@ -1,0 +1,46 @@
+{
+  "name": "Kuji - Random Decision Maker",
+  "short_name": "Kuji",
+  "description": "Interactive decision-making app that helps you make choices through a fun, lottery-style experience. Create multiple decision lists, customize probabilities, and reveal your fate by scratching cards.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "16x16 32x32"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icon-192-maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity", "lifestyle", "entertainment", "personalization"],
+  "lang": "en",
+  "dir": "ltr",
+  "shortcuts": [],
+  "display_override": ["window-controls-overlay", "standalone"],
+  "prefer_related_applications": false
+}

@@ -1,0 +1,285 @@
+/* WebView Compatibility Fallbacks for Android 5.0+ */
+/* Comprehensive support for WebView versions 44+ (Android 5.0+) */
+
+/* Detect WebView version and apply fallbacks */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass {
+    background: rgba(19, 19, 26, 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Fallback for oklch colors (WebView < 111) */
+@supports not (color: oklch(70% 0.2 210)) {
+  :root {
+    /* Convert oklch to hex/rgba for maximum compatibility */
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --accent: #ec4899;
+    --background: #0f0f23;
+    --foreground: #f8fafc;
+    --card: #1e1e2e;
+    --card-foreground: #f8fafc;
+    --popover: #1e1e2e;
+    --popover-foreground: #f8fafc;
+    --primary-foreground: #ffffff;
+    --secondary-foreground: #ffffff;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #6366f1;
+    --chart-1: #6366f1;
+    --chart-2: #a855f7;
+    --chart-3: #ec4899;
+    --chart-4: #f59e0b;
+    --chart-5: #10b981;
+    --sidebar: #1e1e2e;
+    --sidebar-foreground: #f8fafc;
+    --sidebar-primary: #6366f1;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #f8fafc;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #6366f1;
+  }
+
+  .dark {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --accent: #ec4899;
+    --background: #0f0f23;
+    --foreground: #f8fafc;
+    --card: #1e1e2e;
+    --card-foreground: #f8fafc;
+    --popover: #1e1e2e;
+    --popover-foreground: #f8fafc;
+    --primary-foreground: #ffffff;
+    --secondary-foreground: #ffffff;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #6366f1;
+    --sidebar: #1e1e2e;
+    --sidebar-foreground: #f8fafc;
+    --sidebar-primary: #6366f1;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #f8fafc;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #6366f1;
+  }
+}
+
+/* Enhanced neon glow for older WebView */
+@supports not (color: color-mix(in oklch, var(--primary) 50%, transparent)) {
+  .neon-glow {
+    box-shadow:
+      0 0 20px rgba(99, 102, 241, 0.6),
+      0 0 40px rgba(99, 102, 241, 0.4),
+      0 0 60px rgba(99, 102, 241, 0.2),
+      inset 0 0 20px rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+
+  .neon-glow-purple {
+    box-shadow:
+      0 0 20px rgba(168, 85, 247, 0.6),
+      0 0 40px rgba(168, 85, 247, 0.4),
+      0 0 60px rgba(168, 85, 247, 0.2),
+      inset 0 0 20px rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+  }
+}
+
+/* Fallback gradients for WebView < 120 */
+@supports not (background: linear-gradient(in oklch, red, blue)) {
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  }
+
+  .bg-gradient-to-r {
+    background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+  }
+
+  .from-primary {
+    background: linear-gradient(135deg, #6366f1 0%, transparent 100%);
+  }
+
+  .to-secondary {
+    background: linear-gradient(135deg, transparent 0%, #a855f7 100%);
+  }
+}
+
+/* Fix for Android 5.0-7.0 WebView issues */
+@media (max-device-width: 768px) {
+  /* Improve glass effect for mobile */
+  .glass {
+    background: rgba(19, 19, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Ensure touch targets are properly sized */
+  button,
+  [role='button'],
+  .cursor-pointer {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Improve scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix viewport issues */
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+}
+
+/* Manual color mixing fallbacks for older Chromium */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .bg-primary\/10 {
+    background-color: rgba(99, 102, 241, 0.1);
+  }
+
+  .bg-primary\/20 {
+    background-color: rgba(99, 102, 241, 0.2);
+  }
+
+  .bg-secondary\/20 {
+    background-color: rgba(168, 85, 247, 0.2);
+  }
+
+  .border-primary\/50 {
+    border-color: rgba(99, 102, 241, 0.5);
+  }
+
+  .text-foreground\/70 {
+    color: rgba(248, 250, 252, 0.7);
+  }
+}
+
+/* Animation fallbacks for older WebView */
+@supports not (animation-timeline: scroll()) {
+  .animate-pulse {
+    animation: pulse-fallback 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-fallback {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* WebView performance optimizations */
+.glass,
+.neon-glow,
+.neon-glow-purple,
+[class*='bg-gradient'] {
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Fix for gap property not supported in older WebView */
+@supports not (gap: 1rem) {
+  .flex.gap-2 > * + * {
+    margin-left: 0.5rem;
+  }
+
+  .flex.gap-4 > * + * {
+    margin-left: 1rem;
+  }
+
+  .flex.flex-col.gap-2 > * + * {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .flex.flex-col.gap-4 > * + * {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+/* Extreme fallback for very old WebView (Android 5.0-6.0) */
+@media all and (-webkit-min-device-pixel-ratio: 0) and (max-device-width: 768px) {
+  .glass {
+    background: #131326 !important;
+    opacity: 0.95;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .neon-glow {
+    box-shadow:
+      0 0 20px #6366f1,
+      0 0 40px #6366f1;
+    border: 1px solid #6366f1;
+  }
+
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    background: #6366f1;
+  }
+}
+
+/* Accessibility improvements for high contrast mode */
+@media (prefers-contrast: high) {
+  .glass {
+    background: rgba(19, 19, 26, 1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .neon-glow {
+    box-shadow:
+      0 0 10px rgba(99, 102, 241, 1),
+      0 0 20px rgba(99, 102, 241, 0.8);
+  }
+}
+
+/* Force minimum WebView compatibility */
+.webview-safe {
+  background-color: #0f0f23;
+  color: #f8fafc;
+  border: 1px solid #27272a;
+}
+
+/* Apply safe fallbacks to critical elements */
+.kuji-card {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.kuji-button {
+  background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+  color: #ffffff;
+  border: none;
+  min-height: 44px;
+  touch-action: manipulation;
+}
