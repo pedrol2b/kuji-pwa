@@ -87,6 +87,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   themeColor: '#000000',
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
@@ -97,7 +98,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning dir="ltr">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+        />
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="light dark" />
 
