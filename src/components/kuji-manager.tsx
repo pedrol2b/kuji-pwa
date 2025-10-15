@@ -260,7 +260,7 @@ export function KujiManager({ onClose }: KujiManagerProps) {
                   />
                 </div>
                 <div className="border-border/50 bg-background/30 max-h-[200px] overflow-y-auto rounded-lg border p-2">
-                  <div className="grid grid-cols-12 gap-1">
+                  <div className="grid grid-cols-6 gap-2">
                     {filteredIcons.map((iconName) => {
                       const IconComponent = Icons[iconName as keyof typeof Icons] as React.ComponentType<{
                         className?: string
@@ -272,14 +272,14 @@ export function KujiManager({ onClose }: KujiManagerProps) {
                           onClick={() => {
                             setNewItem({ ...newItem, icon: iconName })
                           }}
-                          className={`hover:bg-primary/20 hover:border-primary/50 flex aspect-square items-center justify-center rounded-md border p-1.5 transition-all ${
+                          className={`hover:bg-primary/20 hover:border-primary/50 flex aspect-square items-center justify-center rounded-md border p-3 transition-all ${
                             isSelected
                               ? 'border-primary bg-primary/20 ring-primary/50 ring-2'
                               : 'border-border/30 hover:border-primary/50'
                           }`}
                           title={iconName}
                         >
-                          {IconComponent && <IconComponent className="h-4 w-4" />}
+                          {IconComponent && <IconComponent className="h-6 w-6" />}
                         </button>
                       )
                     })}
