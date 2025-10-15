@@ -38,32 +38,31 @@ export function ScratchCard({ item, dayLabel, isScratched, onScratched }: Scratc
         return
       }
 
-      // Set canvas size
+      // Set canvas size to 2x for better resolution
       canvas.width = rect.width * 2
       canvas.height = rect.height * 2
-      ctx.scale(2, 2)
 
-      // Draw metallic scratch-off coating
-      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height)
+      // Draw metallic scratch-off coating (use canvas dimensions)
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
       gradient.addColorStop(0, '#c0c0c0')
       gradient.addColorStop(0.5, '#e8e8e8')
       gradient.addColorStop(1, '#a8a8a8')
 
       ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, rect.width, rect.height)
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Add texture
       ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
       for (let i = 0; i < 50; i++) {
-        ctx.fillRect(Math.random() * rect.width, Math.random() * rect.height, 2, 2)
+        ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 4, 4)
       }
 
-      // Add text
+      // Add text (use canvas dimensions for positioning)
       ctx.fillStyle = 'rgba(0, 0, 0, 0.3)'
-      ctx.font = 'bold 14px sans-serif'
+      ctx.font = 'bold 28px sans-serif'
       ctx.textAlign = 'center'
-      ctx.fillText('SCRATCH', rect.width / 2, rect.height / 2 - 5)
-      ctx.fillText('HERE', rect.width / 2, rect.height / 2 + 15)
+      ctx.fillText('SCRATCH', canvas.width / 2, canvas.height / 2 - 10)
+      ctx.fillText('HERE', canvas.width / 2, canvas.height / 2 + 30)
 
       setIsCanvasReady(true)
     }
@@ -71,7 +70,7 @@ export function ScratchCard({ item, dayLabel, isScratched, onScratched }: Scratc
     initCanvas()
   }, [isScratched])
 
-  const scratch = (x: number, y: number) => {
+  const scratch = (clientX: number, clientY: number) => {
     try {
       const canvas = canvasRef.current
       if (!canvas || isScratched || !isCanvasReady) return
@@ -84,12 +83,19 @@ export function ScratchCard({ item, dayLabel, isScratched, onScratched }: Scratc
         return
       }
 
-      const scaleX = canvas.width / rect.width
-      const scaleY = canvas.height / rect.height
+      // Calculate the actual position relative to the canvas
+      const x = clientX - rect.left
+      const y = clientY - rect.top
+
+      // The canvas is drawn at 2x resolution (canvas size is 2x the display size)
+      // So we need to multiply by 2 to get the correct canvas coordinates
+      const canvasX = x * 2
+      const canvasY = y * 2
 
       ctx.globalCompositeOperation = 'destination-out'
       ctx.beginPath()
-      ctx.arc((x - rect.left) * scaleX, (y - rect.top) * scaleY, 40, 0, Math.PI * 2)
+      // Radius is also scaled by 2 (40 * 2 = 80 pixels on the 2x canvas)
+      ctx.arc(canvasX, canvasY, 80, 0, Math.PI * 2)
       ctx.fill()
 
       // Check scratch percentage
