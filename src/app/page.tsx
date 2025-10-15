@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-lg font-bold tracking-tight sm:text-xl">Kuji</h1>
-              <p className="text-muted-foreground hidden text-xs sm:block">{activeList?.name || 'No list selected'}</p>
+              <p className="text-muted-foreground text-xs">{activeList?.name || 'No list selected'}</p>
             </div>
           </div>
           <div className="hidden gap-2 md:flex">
