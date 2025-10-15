@@ -1,6 +1,6 @@
 {
   "name": "kuji-pwa",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Kuji is an interactive decision-making app that helps you make choices through a fun, lottery-style experience. Create multiple decision lists for different aspects of your life, customize probabilities for each option, and reveal your fate by scratching cards. Track your decision history, reflect on outcomes with a built-in journal, and gain insights into your decision patterns over time.",
   "scripts": {
     "build": "next build",
